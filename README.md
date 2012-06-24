@@ -21,8 +21,7 @@ http://www.gnu.org/licenses/gpl-3.0.txt
 	Checks if node isn't empty, if is not, checks if data isn't empty
 	if isn't deletes data then node;
 
-#### libglinked_node_t *libglinked_push_node(libglinked_list_t *list, 
-						  linglinked_node_t *node);
+#### libglinked_node_t *libglinked_push_node(libglinked_list_t *list,linglinked_node_t *node);
 	Increments the list items count;
 	Appends node to the end of list
 	Returns the pushed node, this is useful for a combined call of
