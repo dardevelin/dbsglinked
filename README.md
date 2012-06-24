@@ -55,3 +55,5 @@ http://www.gnu.org/licenses/gpl-3.0.txt
 #### void libglinked_reverse_list(libglinked_list_t *list)
 	Reverses the linked list and sets list as the head;
 	
+## TODO
+	A complete todo list can be found in TODO file
