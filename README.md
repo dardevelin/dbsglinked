@@ -8,6 +8,9 @@ See COPYING to get the license or go to
 http://www.gnu.org/licenses/gpl-3.0.txt
 
 ## Lib Interface - quick docs
+### Usage:
+	A complete use of libraries function can be found in main.c
+	main.c is not required to use the library.
 #### libglinked_init_list(libglinked_list_t *list); 
 	Prepares the list so it can be used.
 
