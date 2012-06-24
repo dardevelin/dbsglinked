@@ -44,6 +44,7 @@ libglinked_node_t *libglinked_create_node(void *data, size_t datasz)
 	if( (ptrnode->data = malloc( datasz ))==NULL)
 	{
 		fprintf(stderr,"libglinked_create_node malloc failed to alloc node data\n");
+		free(ptrnode);
 		return NULL;
 	}
 	
