@@ -66,10 +66,13 @@ void libglinked_delete_node(libglinked_node_t *node)
 	}
 }
 
-libglinked_node_t *libglinked_push_node(libglinked_list_t *list, 
+libglinked_node_t *libglinked_push_node(libglinked_list_t *list,
 										libglinked_node_t *node)
 {
 	libglinked_node_t *ptrnode = list->head;
+	
+	if( node == NULL )
+		return NULL; // nothing to push
 	
 	if( list->head == NULL )
 	{
@@ -89,7 +92,7 @@ libglinked_node_t *libglinked_push_node(libglinked_list_t *list,
 libglinked_node_t *libglinked_pop_node(libglinked_list_t *list)
 {
 	libglinked_node_t *ptrnode = list->head;
-
+	
 	if( list->head == NULL )
 		return NULL; // nothing to pop
 
