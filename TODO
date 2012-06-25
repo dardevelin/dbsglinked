@@ -11,3 +11,15 @@
 
 - See if the code needs more comments
   
+- Implement search and friends, 
+
+{
+- maybe add an Identifier to the items, this way a user could define types and use the list
+  as a really generic type one.
+ 
+- if the previous mentioned features gets in, 
+	* implement sort, by key/identifier/type
+	* implement remove function for specific elements
+        * insert elements according to key/id/type rules
+        * ways to define rules
+}
