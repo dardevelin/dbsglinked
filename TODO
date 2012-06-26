@@ -3,6 +3,12 @@
 DONE: - Modify libglinked_delete_node and libglinked_delete_list to use a 
   user define function to delete the node data 
 ---------------
+- modify libglinked_create_node to not allocate and or copy data to node->data.
+  the function will just simply point node->data to the data passed by the user,
+  this way is up to the user to handle the data.
+
+- maybe implemente a macro to make a copy and create a node at the same time
+
 - Perphaps add macros to allow references list, this means that elements that are
   already in the program(e.g string literals, const, or static
   could be added to the list without having to copy them if the user doesn't need
