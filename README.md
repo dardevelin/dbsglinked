@@ -48,11 +48,11 @@ http://www.gnu.org/licenses/gpl-3.0.txt
 #### size_t libglinked_get_num_items(libglinked_list_t *list);
 	Gets the count of the current amount of items in the list;
 
-#### void libglinked_show_node(libglinked_node_t *node, void(*f)(void*));
+#### void libglinked_show_node(libglinked_node_t *node, void(*f)(void * ));
 	Shows the data stored in the node, using the function passed
 	By parameter to it. 
 
-#### void libglinked_show_list(libglinked_list_t *list, void(*f)(void*));
+#### void libglinked_show_list(libglinked_list_t *list, void(*f)(void * ));
 	Shows the full list nodes using the f function passed by parameter
 	to it
 
