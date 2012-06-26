@@ -20,7 +20,7 @@ http://www.gnu.org/licenses/gpl-3.0.txt
 	if the allocation of node_t fails, returns null,
 	if the allocation of datasize fails, frees node_t and returns NULL;
 
-#### void libglinked_delete_node(libglinked_node_t *node, void(*f)(void*))
+#### void libglinked_delete_node(libglinked_node_t *node, void(*f)(void\*))
 	checks if node is null, if it is, returns
         checks if f is null, if is not
 	checks if node->data is null, if not, then calls f(node->data);
@@ -41,7 +41,7 @@ http://www.gnu.org/licenses/gpl-3.0.txt
 		Removes a node from the head of the list and returns it
 		Returns NULL if the list is empty
 
-#### void libglinked_delete_list(libglinked_list_t *list, void(*f)(void*));
+#### void libglinked_delete_list(libglinked_list_t *list, void(*f)(void\*));
 	Pops all nodes from the list and deletes them using 
 	libglinked_delete_node(libglinked_node_t *node, void(*f)(void*));
 
