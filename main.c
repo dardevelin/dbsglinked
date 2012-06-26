@@ -21,7 +21,13 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "glinked_list.h"
+
+void delete_data(void *data)
+{
+	free(data);
+}
 
 void printstr(void *data)
 {
@@ -60,7 +66,7 @@ int main(int argc, char **argv)
 	puts("\nshowing reversed list\n");
 	libglinked_show_list(&list, printstr);
 
-	libglinked_delete_list(&list);
+	libglinked_delete_list(&list, delete_data);
 
 	
 

@@ -34,11 +34,11 @@ typedef struct sGlinkedList {
 //interface
 void libglinked_init_list(libglinked_list_t *);
 libglinked_node_t *libglinked_create_node(void *, size_t);
-void libglinked_delete_node(libglinked_node_t *);
+void libglinked_delete_node(libglinked_node_t *,void(*f)(void*));
 libglinked_node_t *libglinked_push_node(libglinked_list_t *,
 										libglinked_node_t *);
 libglinked_node_t *libglinked_pop_node(libglinked_list_t *);
-void libglinked_delete_list(libglinked_list_t *);
+void libglinked_delete_list(libglinked_list_t *, void(*f)(void*));
 size_t libglinked_get_num_items(libglinked_list_t *);
 void libglinked_show_node(libglinked_node_t *, void(*f)(void*));
 void libglinked_show_list(libglinked_list_t *, void(*f)(void*));

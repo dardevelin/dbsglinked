@@ -1,7 +1,8 @@
 # TODO LIST
-- Modify libglinked_delete_node and libglinked_delete_list to use a 
-  user define function to delete the node data
-
+--------------- added in version 0.0.2
+DONE: - Modify libglinked_delete_node and libglinked_delete_list to use a 
+  user define function to delete the node data 
+---------------
 - Perphaps add macros to allow references list, this means that elements that are
   already in the program(e.g string literals, const, or static
   could be added to the list without having to copy them if the user doesn't need

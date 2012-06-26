@@ -54,13 +54,13 @@ libglinked_node_t *libglinked_create_node(void *data, size_t datasz)
 	return ptrnode;
 }
 
-void libglinked_delete_node(libglinked_node_t *node)
+void libglinked_delete_node(libglinked_node_t *node, void(*f)(void*))
 {
 	if( node != NULL )
 	{
-		if( node->data != NULL )
-			free(node->data);
-		
+		if( node->data != NULL && f != NULL )
+			f(node->data);
+				
 		free(node);
 		return;
 	}
@@ -101,11 +101,11 @@ libglinked_node_t *libglinked_pop_node(libglinked_list_t *list)
 	return ptrnode;
 }
 
-void libglinked_delete_list(libglinked_list_t *list)
+void libglinked_delete_list(libglinked_list_t *list, void(*f)(void*))
 {
 	while(list->head != NULL )
 	{
-		libglinked_delete_node(libglinked_pop_node(list));
+		libglinked_delete_node(libglinked_pop_node(list), f);
 	}
 	
 }

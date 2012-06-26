@@ -1,4 +1,4 @@
-# DBSGLINKED version 0.0.1
+# DBSGLINKED version 0.0.2
 
 This is a small C implementation of a generic linked list, to avoid having to
 create the same code all the time. 
@@ -20,10 +20,13 @@ http://www.gnu.org/licenses/gpl-3.0.txt
 	if the allocation of node_t fails, returns null,
 	if the allocation of datasize fails, frees node_t and returns NULL;
 
-#### void libglinked_delete_node(libglinked_node_t *node);
-	Checks if node isn't empty, if is not, checks if data isn't empty
-	if isn't deletes data then node;
-
+#### void libglinked_delete_node(libglinked_node_t *node, void(*f)(void*))
+	checks if node is null, if it is, returns
+        checks if f is null, if is not
+	checks if node->data is null, if not, then calls f(node->data);
+	if node->data or f are NULL, the node will be freed and the call
+	to f(node->data) will be ignored
+	
 #### libglinked_node_t *libglinked_push_node(libglinked_list_t *list,linglinked_node_t *node);
 	Increments the list items count;
 	Appends node to the end of list
@@ -38,8 +41,9 @@ http://www.gnu.org/licenses/gpl-3.0.txt
 		Removes a node from the head of the list and returns it
 		Returns NULL if the list is empty
 
-#### void libglinked_delete_list(libglinked_list_t *list);
-	Pops all nodes from the list and deletes them;
+#### void libglinked_delete_list(libglinked_list_t *list, void(*f)(void*));
+	Pops all nodes from the list and deletes them using 
+	libglinked_delete_node(libglinked_node_t *node, void(*f)(void*));
 
 #### size_t libglinked_get_num_items(libglinked_list_t *list);
 	Gets the count of the current amount of items in the list;
@@ -57,3 +61,5 @@ http://www.gnu.org/licenses/gpl-3.0.txt
 	
 ## TODO
 	A complete todo list can be found in TODO file
+	This file also contains information of which version received
+	a specific feature
