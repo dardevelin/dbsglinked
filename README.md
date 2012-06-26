@@ -41,9 +41,9 @@ http://www.gnu.org/licenses/gpl-3.0.txt
 		Removes a node from the head of the list and returns it
 		Returns NULL if the list is empty
 
-#### void libglinked_delete_list(libglinked_list_t *list, void(*f)(void\*));
+#### void libglinked_delete_list(libglinked_list_t *list, void(*f)(void * ));
 	Pops all nodes from the list and deletes them using 
-	libglinked_delete_node(libglinked_node_t *node, void(*f)(void*));
+	libglinked_delete_node(libglinked_node_t *node, void(*f)(void * ));
 
 #### size_t libglinked_get_num_items(libglinked_list_t *list);
 	Gets the count of the current amount of items in the list;
