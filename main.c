@@ -57,14 +57,14 @@ int main(int argc, char **argv)
 
 	libglinked_init_list(&list);
 	
-	node = libglinked_create_node((void*) sstrdup(str));
+	node = libglinked_create_node((void*) sstrdup(str), delete_data);
 	
 	libglinked_show_node(node, printstr);
 
 	libglinked_push_node(&list, node);
 	
 
-	node = libglinked_create_node((void*) sstrdup(str2));
+	node = libglinked_create_node((void*) sstrdup(str2), delete_data);
 	
 	libglinked_show_node(node, printstr);
 
@@ -79,7 +79,7 @@ int main(int argc, char **argv)
 	puts("\nshowing reversed list\n");
 	libglinked_show_list(&list, printstr);
 
-	libglinked_delete_list(&list, delete_data);
+	libglinked_delete_list(&list);
 
 	
 
