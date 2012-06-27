@@ -1,4 +1,4 @@
-# DBSGLINKED version 0.0.3
+# DBSGLINKED version 0.0.4
 
 This is a small C implementation of a generic linked list, to avoid having to
 create the same code all the time. 
@@ -14,19 +14,21 @@ http://www.gnu.org/licenses/gpl-3.0.txt
 #### libglinked_init_list(libglinked_list_t *list); 
 	Prepares the list so it can be used.
 
-#### libglinked_node_t *libglinked_create_node(void *data); 
+#### libglinked_node_t *libglinked_create_node(void *data, void(*dalloc)(void * )); 
      checks if data is null, if it is, returns null
      if data is not null, creates a ligblinked_node_t * and points
      node->data to data;
+     sets node->data_deallocator to dalloc; the user may use null to not deallocate
+     the data. Useful for things like literals and constanst
      sets node->next to null
      returns the newly created node
 
-#### void libglinked_delete_node(libglinked_node_t *node, void(*f)(void * ))
-	checks if node is null, if it is, returns
-        checks if f is null, if is not
-	checks if node->data is null, if not, then calls f(node->data);
-	if node->data or f are NULL, the node will be freed and the call
-	to f(node->data) will be ignored
+#### void libglinked_delete_node(libglinked_node_t *node )
+	checks if node is null, if it is, returns null
+	checks if node->data and node->data_deallocator aren't set
+        to null, if not, then calls node->data_deallocator(node->data);
+	else if node->data or node->data_deallocator are set to null
+	the call will be but the node_t structure will be deallocated
 	
 #### libglinked_node_t *libglinked_push_node(libglinked_list_t *list,linglinked_node_t *node);
 	Increments the list items count;
@@ -42,9 +44,9 @@ http://www.gnu.org/licenses/gpl-3.0.txt
 		Removes a node from the head of the list and returns it
 		Returns NULL if the list is empty
 
-#### void libglinked_delete_list(libglinked_list_t *list, void(*f)(void * ));
+#### void libglinked_delete_list(libglinked_list_t *list );
 	Pops all nodes from the list and deletes them using 
-	libglinked_delete_node(libglinked_node_t *node, void(*f)(void * ));
+	libglinked_delete_node(libglinked_node_t *node );
 
 #### size_t libglinked_get_num_items(libglinked_list_t *list);
 	Gets the count of the current amount of items in the list;
