@@ -35,7 +35,7 @@ http://www.gnu.org/licenses/gpl-3.0.txt
 	libglinked_push_node with libglinked_create_node;
 	Like so:
 	libglinked_node_t * catch;
-	catch = libglinked_push_node(&list, libglinked_create_node(data,sizeof(data));
+	catch = libglinked_push_node(&list, libglinked_create_node(data);
 
 #### libglinked_node_t *libglinked_pop_node(libglinked_list_t *list);
 		Decrements the list items count;
