@@ -1,4 +1,4 @@
-# DBSGLINKED version 0.0.2
+# DBSGLINKED version 0.0.3
 
 This is a small C implementation of a generic linked list, to avoid having to
 create the same code all the time. 
@@ -14,11 +14,12 @@ http://www.gnu.org/licenses/gpl-3.0.txt
 #### libglinked_init_list(libglinked_list_t *list); 
 	Prepares the list so it can be used.
 
-#### libglinked_node_t *libglinked_create_node(void *data, size_t datasize); 
-	Creates a libglinked_node_t * and makes a copy of size datasize
-	from data to the new allocated data element in the node
-	if the allocation of node_t fails, returns null,
-	if the allocation of datasize fails, frees node_t and returns NULL;
+#### libglinked_node_t *libglinked_create_node(void *data); 
+     checks if data is null, if it is, returns null
+     if data is not null, creates a ligblinked_node_t * and points
+     node->data to data;
+     sets node->next to null
+     returns the newly created node
 
 #### void libglinked_delete_node(libglinked_node_t *node, void(*f)(void * ))
 	checks if node is null, if it is, returns
