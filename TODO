@@ -23,11 +23,13 @@ DONE: - Modify libglinked_delete_node and libglinked_delete_list to use a
   this should make easy to integrate the list into projects that
   use a custom (de)allocator. these functions will be used to create and delete 
   libglinked_node_t structures
-
 - add function to set libglinked_list_t function pointers.
-
 - update libglinked_create_node to receive the list since the list contains
   the allocator and deallocator of the node structure
+- update libglinked_delete_node and libglinked_delete_list to use the list as means
+  to use the correct node structures deallocators of that list
+
+
 
 - Try make deb package for debian
 
