@@ -1,5 +1,13 @@
 # TODO LIST
 
+-------------- changes made in version 0.0.4
+DONE: - update node structure to contain the data deallocator
+DONE: - update libglinked_create_node to receive a data deallocator
+        null is used to identify that doesn't require deallocation
+DONE: - update libglinked_delete_node and libglinked_delete_list
+        to not require a deallocator for data
+---------------
+
 --------------- changes made in version 0.0.3
 DONE: - modify libglinked_create_node to not allocate or copy data to node->data.
   the function will just simply point node->data to the data passed by the user,
@@ -20,9 +28,6 @@ DONE: - Modify libglinked_delete_node and libglinked_delete_list to use a
 
 - update libglinked_create_node to receive the list since the list contains
   the allocator and deallocator of the node structure
-
-- update libglinked_delete_node and libglinked_delete_list
-  to not require a deallocator for data
 
 - Try make deb package for debian
 
