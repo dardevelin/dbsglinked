@@ -24,6 +24,19 @@
 #include <stdlib.h>
 #include "glinked_list.h"
 
+char *sstrdup(const char * str)
+{
+	size_t l = strlen(str);
+	char *new;
+	if( (new = malloc(l+1))== NULL)
+	{
+		fprintf(stderr,"sstrdup malloc failed\n");
+		return NULL;
+	}
+	memcpy(new,str,l); new[l] ='\0';
+	return new;
+}
+
 void delete_data(void *data)
 {
 	free(data);
@@ -44,14 +57,14 @@ int main(int argc, char **argv)
 
 	libglinked_init_list(&list);
 	
-	node = libglinked_create_node((void*)str, strlen(str)+1);
+	node = libglinked_create_node((void*) sstrdup(str));
 	
 	libglinked_show_node(node, printstr);
 
 	libglinked_push_node(&list, node);
 	
 
-	node = libglinked_create_node((void*)str2, strlen(str2)+1);
+	node = libglinked_create_node((void*) sstrdup(str2));
 	
 	libglinked_show_node(node, printstr);
 
