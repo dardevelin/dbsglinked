@@ -31,7 +31,7 @@ void libglinked_init_list(libglinked_list_t *list)
 	return;
 }
 
-libglinked_node_t *libglinked_create_node(void *data)
+libglinked_node_t *libglinked_create_node(void *data, void(*dalloc)(void*))
 {
 	libglinked_node_t *ptrnode;
 	
@@ -45,17 +45,18 @@ libglinked_node_t *libglinked_create_node(void *data)
 	}
 
 	ptrnode->data = data;
+	ptrnode->data_deallocator = dalloc;
 	ptrnode->next = NULL;
 
 	return ptrnode;
 }
 
-void libglinked_delete_node(libglinked_node_t *node, void(*f)(void*))
+void libglinked_delete_node(libglinked_node_t *node)
 {
 	if( node != NULL )
 	{
-		if( node->data != NULL && f != NULL )
-			f(node->data);
+		if( node->data != NULL && node->data_deallocator != NULL )
+			node->data_deallocator(node->data);
 				
 		free(node);
 		return;
@@ -97,11 +98,11 @@ libglinked_node_t *libglinked_pop_node(libglinked_list_t *list)
 	return ptrnode;
 }
 
-void libglinked_delete_list(libglinked_list_t *list, void(*f)(void*))
+void libglinked_delete_list(libglinked_list_t *list )
 {
 	while(list->head != NULL )
 	{
-		libglinked_delete_node(libglinked_pop_node(list), f);
+		libglinked_delete_node(libglinked_pop_node(list));
 	}
 	
 }
