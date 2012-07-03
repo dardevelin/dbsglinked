@@ -1,4 +1,4 @@
-# DBSGLINKED version 0.0.4
+# DBSGLINKED version 0.0.5
 
 This is a small C implementation of a generic linked list, to avoid having to
 create the same code all the time. 
@@ -14,21 +14,22 @@ http://www.gnu.org/licenses/gpl-3.0.txt
 #### libglinked_init_list(libglinked_list_t *list); 
 	Prepares the list so it can be used.
 
-#### libglinked_node_t *libglinked_create_node(void *data, void(*dalloc)(void * )); 
+#### libglinked_node_t *libglinked_create_node(libglinked_list_t *list, void *data, void(*dalloc)(void * ));
      checks if data is null, if it is, returns null
-     if data is not null, creates a ligblinked_node_t * and points
+     if data is not null, creates a ligblinked_node_t using list->node_allocator and points
      node->data to data;
      sets node->data_deallocator to dalloc; the user may use null to not deallocate
      the data. Useful for things like literals and constanst
      sets node->next to null
      returns the newly created node
 
-#### void libglinked_delete_node(libglinked_node_t *node )
+#### void libglinked_delete_node(libglinked_list_t *list, libglinked_node_t *node )
 	checks if node is null, if it is, returns null
 	checks if node->data and node->data_deallocator aren't set
         to null, if not, then calls node->data_deallocator(node->data);
 	else if node->data or node->data_deallocator are set to null
-	the call will be but the node_t structure will be deallocated
+	the call will be ignored, however the node_t structure will be deallocated using
+	list->node_deallocator that was set using libglinked_init_list
 	
 #### libglinked_node_t *libglinked_push_node(libglinked_list_t *list,linglinked_node_t *node);
 	Increments the list items count;
