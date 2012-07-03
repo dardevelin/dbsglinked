@@ -42,14 +42,15 @@ void libglinked_init_list(libglinked_list_t *list,
 	return;
 }
 
-libglinked_node_t *libglinked_create_node(void *data, void(*dalloc)(void*))
+libglinked_node_t *libglinked_create_node(libglinked_list_t *list,
+    void *data, void(*dalloc)(void*))
 {
 	libglinked_node_t *ptrnode;
 	
 	if (data == NULL )
 		return NULL;
-	
-	if( (ptrnode = malloc( sizeof(libglinked_node_t)))==NULL )
+
+	if( (ptrnode = list->node_allocator( sizeof(libglinked_node_t)))==NULL )
 	{
 		fprintf(stderr,"libglinked_create_node malloc failed to alloc node_t\n");
 		return NULL;
