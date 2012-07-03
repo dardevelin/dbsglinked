@@ -25,7 +25,7 @@
 #include "glinked_list.h"
 
 void libglinked_init_list(libglinked_list_t *list, 
-    void *(*node_allocator)(void*), void(*node_deallocator)(void*))
+    void *(*node_allocator)(size_t), void(*node_deallocator)(void*))
 {
 	list->count = 0;
 	if(node_allocator != NULL)
