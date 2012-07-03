@@ -34,7 +34,7 @@ typedef struct sGlinkedNode {
 
 typedef struct sGlinkedList {
 	size_t count;
-	void *(*node_allocator)(void *);
+	void *(*node_allocator)(size_t);
 	void (*node_deallocator)(void *);
 	libglinked_node_t *head;
 } libglinked_list_t;
