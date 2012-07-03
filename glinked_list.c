@@ -24,9 +24,20 @@
 #include <stdlib.h>
 #include "glinked_list.h"
 
-void libglinked_init_list(libglinked_list_t *list)
+void libglinked_init_list(libglinked_list_t *list, 
+    void *(*node_allocator)(void*), void(*node_deallocator)(void*))
 {
 	list->count = 0;
+	if(node_allocator != NULL)
+		list->node_allocator = node_allocator;
+	else
+		list->node_allocator = LIBGLINKED_DEFAULT_ALLOCATOR;
+	
+	if(node_deallocator != NULL)
+		list->node_deallocator = node_deallocator;
+	else
+		list->node_deallocator = LIBGLINKED_DEFAULT_DEALLOCATOR;
+	
 	list->head = NULL;
 	return;
 }
