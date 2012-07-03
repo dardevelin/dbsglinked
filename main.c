@@ -55,7 +55,7 @@ int main(int argc, char **argv)
 	char *str  = "Hello World";
 	char *str2 = "World Hello";
 
-	libglinked_init_list(&list);
+	libglinked_init_list(&list, malloc, free);
 	
 	node = libglinked_create_node((void*) sstrdup(str), delete_data);
 	
