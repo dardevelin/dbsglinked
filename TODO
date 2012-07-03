@@ -1,5 +1,18 @@
 # TODO LIST
 
+--------------- changes made in version 0.0.5
+DONE:- Add to libglinked_list_t function pointer for an allocator and a deallocator
+  this should make easy to integrate the list into projects that
+  use a custom (de)allocator. these functions will be used to create and delete 
+  libglinked_node_t structures
+DONE↓:- add function to set libglinked_list_t function pointers. //changed to
+    →- modify libglinked_init_list to receive a (de)allocator
+DONE:- update libglinked_create_node to receive the list since the list contains
+  the allocator and deallocator of the node structure
+DONE: - update libglinked_delete_node and libglinked_delete_list to use the list as means
+  to use the correct node structures deallocators of that list
+---------------
+
 -------------- changes made in version 0.0.4
 DONE: - update node structure to contain the data deallocator
 DONE: - update libglinked_create_node to receive a data deallocator
@@ -18,17 +31,6 @@ DONE: - modify libglinked_create_node to not allocate or copy data to node->data
 DONE: - Modify libglinked_delete_node and libglinked_delete_list to use a 
   user define function to delete the node data 
 ---------------
-
-- Add to libglinked_list_t function pointer for an allocator and a deallocator
-  this should make easy to integrate the list into projects that
-  use a custom (de)allocator. these functions will be used to create and delete 
-  libglinked_node_t structures
-- add function to set libglinked_list_t function pointers. //changed to
-   - modify libglinked_init_list to receive a (de)allocator
-- update libglinked_create_node to receive the list since the list contains
-  the allocator and deallocator of the node structure
-- update libglinked_delete_node and libglinked_delete_list to use the list as means
-  to use the correct node structures deallocators of that list
 
 
 
