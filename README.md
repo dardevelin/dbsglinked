@@ -11,7 +11,7 @@ http://www.gnu.org/licenses/gpl-3.0.txt
 ### Usage:
 	A complete use of libraries function can be found in main.c
 	main.c is not required to use the library.
-#### libglinked_init_list(libglinked_list_t *list); 
+#### libglinked_init_list(libglinked_list_t *list, void*(*node_allocator)(void * ), void(*node_deallocator)(void * )); 
 	Prepares the list so it can be used.
 
 #### libglinked_node_t *libglinked_create_node(libglinked_list_t *list, void *data, void(*dalloc)(void * ));
