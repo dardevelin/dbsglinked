@@ -1,6 +1,6 @@
 # TODO LIST
 
---------------- changes made in version 0.0.5
+--------------- changes made in version 0.0.5 + 0.0.6 + 0.0.7
 DONE:- Add to libglinked_list_t function pointer for an allocator and a deallocator
   this should make easy to integrate the list into projects that
   use a custom (de)allocator. these functions will be used to create and delete 
