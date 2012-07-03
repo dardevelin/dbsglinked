@@ -63,14 +63,14 @@ libglinked_node_t *libglinked_create_node(libglinked_list_t *list,
 	return ptrnode;
 }
 
-void libglinked_delete_node(libglinked_node_t *node)
+void libglinked_delete_node(libglinked_list_t *list, libglinked_node_t *node)
 {
 	if( node != NULL )
 	{
 		if( node->data != NULL && node->data_deallocator != NULL )
 			node->data_deallocator(node->data);
-				
-		free(node);
+		
+		list->node_deallocator(node);
 		return;
 	}
 }
