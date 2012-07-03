@@ -40,7 +40,7 @@ typedef struct sGlinkedList {
 } libglinked_list_t;
 //interface
 void libglinked_init_list(libglinked_list_t *, 
-  void *(*node_allocator)(void*), void(*node_deallocator)(void*));
+  void *(*node_allocator)(size_t), void(*node_deallocator)(void*));
 
 libglinked_node_t *libglinked_create_node(libglinked_list_t *,
   void *, void(*dalloc)(void*));
