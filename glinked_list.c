@@ -76,7 +76,7 @@ void libglinked_delete_node(libglinked_list_t *list, libglinked_node_t *node)
 }
 
 libglinked_node_t *libglinked_push_node(libglinked_list_t *list,
-										libglinked_node_t *node)
+    libglinked_node_t *node)
 {
 	libglinked_node_t *ptrnode = list->head;
 	
