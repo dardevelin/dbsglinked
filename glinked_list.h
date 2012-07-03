@@ -23,8 +23,8 @@
 #define LIBGLINKED_LIST_H_
 
 #include <stdlib.h>
-#define LIBGLINKED_DEFAULT_ALLOCATOR malloc;
-#define LIBGLINKED_DEFAULT_DEALLOCATOR free;
+#define LIBGLINKED_DEFAULT_ALLOCATOR malloc
+#define LIBGLINKED_DEFAULT_DEALLOCATOR free
 
 typedef struct sGlinkedNode {
 	void *data;
