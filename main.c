@@ -55,16 +55,16 @@ int main(int argc, char **argv)
 	char *str  = "Hello World";
 	char *str2 = "World Hello";
 
-	libglinked_init_list(&list, malloc, free);
+	libglinked_init_list(&list, NULL, NULL);
 	
-	node = libglinked_create_node((void*) sstrdup(str), delete_data);
+	node = libglinked_create_node(&list, (void*) sstrdup(str), delete_data);
 	
 	libglinked_show_node(node, printstr);
 
 	libglinked_push_node(&list, node);
 	
 
-	node = libglinked_create_node((void*) sstrdup(str2), delete_data);
+	node = libglinked_create_node(&list,(void*) sstrdup(str2), delete_data);
 	
 	libglinked_show_node(node, printstr);
 
