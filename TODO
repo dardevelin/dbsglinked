@@ -32,7 +32,12 @@ DONE: - Modify libglinked_delete_node and libglinked_delete_list to use a
   user define function to delete the node data 
 ---------------
 
+- add function like foreach over the list
+- add split function
+- add join function
+- add find function
 
+- possibly add fast append capabilities
 
 - Try make deb package for debian
 
