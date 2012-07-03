@@ -114,7 +114,7 @@ void libglinked_delete_list(libglinked_list_t *list )
 {
 	while(list->head != NULL )
 	{
-		libglinked_delete_node(libglinked_pop_node(list));
+		libglinked_delete_node(&list,libglinked_pop_node(list));
 	}
 	
 }
