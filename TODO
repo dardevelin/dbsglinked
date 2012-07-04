@@ -1,5 +1,10 @@
 # TODO LIST
 
+--------------- changes made in version 0.0.9
+DONE - add lifo functions, push and pop operations
+     - update main.c to present a better sample
+---------------
+
 --------------- changes made in version 0.0.8
 DONE: - change libglinked_push_node and libglinked_pop_node names
         to libglinked_enqueue_node and libglinked_dequeue_node
