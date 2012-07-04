@@ -61,14 +61,14 @@ int main(int argc, char **argv)
 	
 	libglinked_show_node(node, printstr);
 
-	libglinked_push_node(&list, node);
+	libglinked_enqueue_node(&list, node);
 	
 
 	node = libglinked_create_node(&list,(void*) sstrdup(str2), delete_data);
 	
 	libglinked_show_node(node, printstr);
 
-	libglinked_push_node(&list, node);
+	libglinked_enqueue_node(&list, node);
 
 	puts("\nshowing complete list\n");
 	
