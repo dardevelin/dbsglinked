@@ -49,40 +49,82 @@ void printstr(void *data)
 }
 
 int main(int argc, char **argv)
-{
-	libglinked_list_t list;
-	libglinked_node_t *node;
+{		
 	char *str  = "Hello World";
 	char *str2 = "World Hello";
 
-	libglinked_init_list(&list, NULL, NULL);
+	libglinked_node_t *node;
+	//handle fifo list sample
+
+	libglinked_list_t list_fifo;
+
+	libglinked_init_list(&list_fifo, NULL, NULL);
 	
-	node = libglinked_create_node(&list, (void*) sstrdup(str), delete_data);
+	node = libglinked_create_node(&list_fifo,
+								  (void*) sstrdup(str),
+								  delete_data);
 	
-	libglinked_show_node(node, printstr);
-
-	libglinked_enqueue_node(&list, node);
+	if(node == NULL )
+		fprintf(stderr,"failed to create node %d\n", __LINE__);
+		
 	
+	if(NULL == libglinked_enqueue_node(&list_fifo, node) )
+		fprintf(stderr,"failed to enqueue node %d\n", __LINE__);
 
-	node = libglinked_create_node(&list,(void*) sstrdup(str2), delete_data);
+	node = libglinked_create_node(&list_fifo,
+								  (void *)sstrdup(str2),
+								  delete_data);
+
+	if(node == NULL)
+		fprintf(stderr,"failed to create node %d\n", __LINE__);
+
+	if(NULL == libglinked_enqueue_node(&list_fifo, node) )
+		fprintf(stderr,"failed to enqueue node %d\n", __LINE__);
+
+	puts("show fifo results");
+	libglinked_show_list(&list_fifo, printstr);
+	puts("the reverse list");
+	libglinked_reverse_list(&list_fifo);
+	libglinked_show_list(&list_fifo, printstr);
+	puts("\n");
+
 	
-	libglinked_show_node(node, printstr);
+	//clean the node just to make sure
+	node = NULL;
 
-	libglinked_enqueue_node(&list, node);
+	libglinked_list_t list_lifo;
 
-	puts("\nshowing complete list\n");
+	//hanlde lifo sample
+	libglinked_init_list(&list_lifo, NULL, NULL);
 	
-	libglinked_show_list(&list, printstr);
+	node = libglinked_create_node(&list_lifo, 
+								  (void*) sstrdup(str),
+								  delete_data);
 
-	libglinked_reverse_list(&list);
+	if(node == NULL)
+		fprintf(stderr,"failed to create node %d\n", __LINE__);
 
-	puts("\nshowing reversed list\n");
-	libglinked_show_list(&list, printstr);
+	if( NULL == libglinked_push_node(&list_lifo, node) )
+		fprintf(stderr,"failed to push node %d\n", __LINE__);
 
-	libglinked_delete_list(&list);
+   
+	node = libglinked_create_node(&list_lifo, 
+								  (void *) sstrdup(str2),
+								  delete_data);
 
+	if(node == NULL)
+		fprintf(stderr,"failed create node %d\n", __LINE__);
+
+	if( NULL == libglinked_push_node(&list_lifo, node) )
+		fprintf(stderr,"failed to push node %d\n", __LINE__);
+
+	puts("show lifo results");
+	libglinked_show_list(&list_lifo, printstr);
+	puts("show reverse list");
+	libglinked_reverse_list(&list_lifo);
+	libglinked_show_list(&list_lifo, printstr);
+	puts("\n");
 	
-
-	printf("Worked\n");
-	return 0;
+	
+  	return 0;
 }
