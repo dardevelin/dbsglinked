@@ -52,6 +52,11 @@ libglinked_node_t *libglinked_enqueue_node(libglinked_list_t *,
 
 libglinked_node_t *libglinked_dequeue_node(libglinked_list_t *);
 
+libglinked_node_t *libglinked_push_node(libglinked_list_t *,
+    libglinked_node_t *);
+
+libglinked_node_t *libglinked_pop_node(libglinked_list_t *);
+
 void libglinked_delete_list(libglinked_list_t * );
 
 size_t libglinked_get_num_items(libglinked_list_t *);
