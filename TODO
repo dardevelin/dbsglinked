@@ -1,5 +1,11 @@
 # TODO LIST
 
+--------------- changes made in version 0.0.8
+DONE: - change libglinked_push_node and libglinked_pop_node names
+        to libglinked_enqueue_node and libglinked_dequeue_node
+	to better match FIFO(first in, first out) terminology
+---------------
+
 --------------- changes made in version 0.0.5 + 0.0.6 + 0.0.7
 DONE:- Add to libglinked_list_t function pointer for an allocator and a deallocator
   this should make easy to integrate the list into projects that

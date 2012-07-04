@@ -1,4 +1,4 @@
-# DBSGLINKED version 0.0.7
+# DBSGLINKED version 0.0.8
 
 This is a small C implementation of a generic linked list, to avoid having to
 create the same code all the time. 
@@ -31,22 +31,22 @@ http://www.gnu.org/licenses/gpl-3.0.txt
 	the call will be ignored, however the node_t structure will be deallocated using
 	list->node_deallocator that was set using libglinked_init_list
 	
-#### libglinked_node_t *libglinked_push_node(libglinked_list_t *list,linglinked_node_t *node);
+#### libglinked_node_t *libglinked_enqueue_node(libglinked_list_t *list,linglinked_node_t *node);
 	Increments the list items count;
 	Appends node to the end of list
-	Returns the pushed node, this is useful for a combined call of
-	libglinked_push_node with libglinked_create_node;
+	Returns the enqueued node, this is useful for a combined call of
+	libglinked_enqueue_node with libglinked_create_node;
 	Like so:
 	libglinked_node_t * catch;
-	catch = libglinked_push_node(&list, libglinked_create_node(data));
+	catch = libglinked_enqueue_node(&list, libglinked_create_node(data));
 
-#### libglinked_node_t *libglinked_pop_node(libglinked_list_t *list);
+#### libglinked_node_t *libglinked_dequeue_node(libglinked_list_t *list);
 		Decrements the list items count;
 		Removes a node from the head of the list and returns it
 		Returns NULL if the list is empty
 
 #### void libglinked_delete_list(libglinked_list_t *list );
-	Pops all nodes from the list and deletes them using 
+	dequeues all nodes from the list and deletes them using 
 	libglinked_delete_node(libglinked_node_t *node );
 
 #### size_t libglinked_get_num_items(libglinked_list_t *list);
