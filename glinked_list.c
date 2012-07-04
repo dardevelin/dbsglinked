@@ -98,6 +98,27 @@ libglinked_node_t *libglinked_enqueue_node(libglinked_list_t *list,
 	return ptrnode;
 }
 
+libglinked_node_t *libglinked_push_node(libglinked_list_t *list,
+    libglinked_node_t *node)
+{
+
+	if( node == NULL )
+		return NULL; //nothing to push
+	
+	if( list->head == NULL )
+	{
+		list->head = node;
+		list->count++;
+		return node;
+	}
+
+	node->next = list->head;
+	list->head = node;
+	list->count++;
+
+	return node;
+}
+
 libglinked_node_t *libglinked_dequeue_node(libglinked_list_t *list)
 {
 	libglinked_node_t *ptrnode = list->head;
@@ -105,6 +126,18 @@ libglinked_node_t *libglinked_dequeue_node(libglinked_list_t *list)
 	if( list->head == NULL )
 		return NULL; // nothing to dequeue
 
+	list->head = list->head->next;
+	list->count--;
+	return ptrnode;
+}
+
+libglinked_node_t *libglinked_pop_node(libglinked_list_t *list)
+{
+	libglinked_node_t *ptrnode = list->head;
+
+	if( list->head == NULL )
+		return NULL; // nothing to pop
+	
 	list->head = list->head->next;
 	list->count--;
 	return ptrnode;
