@@ -125,6 +125,10 @@ int main(int argc, char **argv)
 	libglinked_show_list(&list_lifo, printstr);
 	puts("\n");
 	
+	//erase both lists
+
+	libglinked_delete_list(&list_fifo);
+	libglinked_delete_list(&list_lifo);
 	
   	return 0;
 }
