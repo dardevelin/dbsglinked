@@ -73,8 +73,7 @@ void printstr(void *data)
 */
 void printint(void *data)
 {
-	int *it = (int *) data;
-	printf("%d\n", *it);
+	printf("%d\n", *(int*)data);
 }
 
 /*
