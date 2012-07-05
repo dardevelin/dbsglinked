@@ -199,12 +199,17 @@ void libglinked_reverse_list(libglinked_list_t *list)
 
 }
 
+void *libglinked_foreach_node(libglinked_list_t * list, void * state,
+    void *(*action)(void * ,void *, void *),
+    void * param)
+{
+	libglinked_node_t *ptrnode;
+	void *action_ret = NULL;
 
+	for(ptrnode = list->head; ptrnode != NULL; ptrnode = ptrnode->next)
+	{
+		action_ret = action(state, ptrnode->data, param);
+	}
 
-
-
-
-
-
-
-
+	return action_ret;
+}
