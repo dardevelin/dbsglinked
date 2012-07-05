@@ -24,6 +24,11 @@
 #include <stdlib.h>
 #include "glinked_list.h"
 
+/*
+  returns a copy of a string, can be 
+  considered as node->data allocator
+  this is a user defined function.
+*/
 char *sstrdup(const char * str)
 {
 	size_t l = strlen(str);
@@ -36,44 +41,138 @@ char *sstrdup(const char * str)
 	memcpy(new,str,l); new[l] ='\0';
 	return new;
 }
-
+/*
+  the node->data deallocator, 
+  for node->data created by sstrdup
+  used along with libglinked_create_node
+  this is a user defined function
+*/
 void delete_data(void *data)
 {
 	free(data);
 }
 
+/*
+  shows node->data when data is
+  a string.
+  used along show_node and show_list
+  functions.
+  this is a user defined function
+*/
 void printstr(void *data)
 {
-	char *str = (char*) data;
-	printf("%s\n", str);
+	printf("%s\n", (char *)data);
+}
+
+/*
+  shows node->data when data is an
+  int.
+  used along with show_node and show_list
+  functions.
+  this is a user defined function.
+*/
+void printint(void *data)
+{
+	int *it = (int *) data;
+	printf("%d\n", *it);
+}
+
+/*
+  returns a copy of a int, can be 
+  considered as node->data allocator
+  this is a user defined function.
+*/
+int *icopy(int data)
+{
+	int *new;
+	size_t sz = sizeof(int);
+	if( (new = malloc( sz )) == NULL )
+	{
+		fprintf(stderr,"icopy malloc failed\n");
+		return NULL;
+	}
+	
+	memcpy(new, &data, sz);
+	return new;
+}
+
+/*
+  frees node->data allocated by
+  icopy.
+  used along with libglinked_create_node
+  function, as the deallocator parameter
+  this is a user defined function.
+*/
+void ideallocator(void *data)
+{
+	free(data);
+}
+/*
+  this is the function that is triggered for each item
+  of the linked list.
+  for more info check the readme file, but in short, 
+  the return of this function is usually to remark the last
+  operation made.
+  state to go accross calls between elements, 
+  data is the node->data
+  param is for/if you need to pass something else.
+  used with the libglinked_foreach_node function.
+  this is a user defined function.
+*/
+void *sum_int_list(void *state, void *data, void *param)
+{
+	//return value. this can be used to return the last
+	void *ret = NULL;
+	
+	(*(int*)state) += ( (*(int*)data) * (*(int*)param) );
+
+	(*(int*)data) *= (*(int*)param);
+
+	return ret = data;
+	
 }
 
 int main(int argc, char **argv)
-{		
+{
+	//our sample constants
 	char *str  = "Hello World";
 	char *str2 = "World Hello";
 
 	libglinked_node_t *node;
 	//handle fifo list sample
 
+	//the list used to sample a fifo implementation
 	libglinked_list_t list_fifo;
 
+	/*iniciate the list, NULL will set the 
+	  default allocator and default deallocator for
+	  libglinked_node_t structures.
+	  default ones are malloc and free.
+	  you can set you own allocators by passing a allocator
+	  of void *(*allocator)(void *)
+	  and a deallocator of void (*deallocator)(void *);
+	*/
 	libglinked_init_list(&list_fifo, NULL, NULL);
+
 	
+	/*create the node and put it in a temporary node, 
+	  the list is used because of the libglinked_node_t
+	  structures allocators
+	  returns null in failure
+	 */
 	node = libglinked_create_node(&list_fifo,
-								  (void*) sstrdup(str),
-								  delete_data);
+    (void*) sstrdup(str), delete_data);
 	
-	if(node == NULL )
+	//check for failure
+	if(node == NULL ) 
 		fprintf(stderr,"failed to create node %d\n", __LINE__);
 		
-	
+	//check for failure while trying to add to the fifo list
 	if(NULL == libglinked_enqueue_node(&list_fifo, node) )
 		fprintf(stderr,"failed to enqueue node %d\n", __LINE__);
 
 	node = libglinked_create_node(&list_fifo,
-								  (void *)sstrdup(str2),
-								  delete_data);
+	    (void *)sstrdup(str2), delete_data);
 
 	if(node == NULL)
 		fprintf(stderr,"failed to create node %d\n", __LINE__);
@@ -98,8 +197,7 @@ int main(int argc, char **argv)
 	libglinked_init_list(&list_lifo, NULL, NULL);
 	
 	node = libglinked_create_node(&list_lifo, 
-								  (void*) sstrdup(str),
-								  delete_data);
+	    (void*) sstrdup(str), delete_data);
 
 	if(node == NULL)
 		fprintf(stderr,"failed to create node %d\n", __LINE__);
@@ -109,8 +207,7 @@ int main(int argc, char **argv)
 
    
 	node = libglinked_create_node(&list_lifo, 
-								  (void *) sstrdup(str2),
-								  delete_data);
+        (void *) sstrdup(str2), delete_data);
 
 	if(node == NULL)
 		fprintf(stderr,"failed create node %d\n", __LINE__);
@@ -129,6 +226,69 @@ int main(int argc, char **argv)
 
 	libglinked_delete_list(&list_fifo);
 	libglinked_delete_list(&list_lifo);
+
+	//handle sample int list
+	libglinked_list_t list_int;
 	
+	libglinked_init_list(&list_int, NULL, NULL);
+	
+	//clean node just to make sure
+	node = NULL;
+
+	node = libglinked_create_node(&list_int, 
+       (void *)icopy(15), ideallocator);
+
+	if( node == NULL )
+		fprintf(stderr,"failed to create list_int node %d\n", __LINE__);
+
+	if(NULL == libglinked_enqueue_node(&list_int, node) )
+		fprintf(stderr,"failed to enqueue node %d\n", __LINE__);
+
+	node = libglinked_create_node(&list_fifo, 
+       (void*)icopy(30), ideallocator);
+
+	if(node == NULL)
+		fprintf(stderr,"failed to create node %d\n", __LINE__);
+
+	if(NULL == libglinked_enqueue_node(&list_int, node) )
+		fprintf(stderr,"failed to enqueue node %d\n", __LINE__);
+
+	
+	node = libglinked_create_node(&list_int, 
+       (void *)icopy(45), ideallocator);
+
+	if(node == NULL )
+		fprintf(stderr,"failed to create node %d\n", __LINE__);
+
+	if(NULL == libglinked_enqueue_node(&list_int, node) )
+		fprintf(stderr,"failed to enqueue node %d\n", __LINE__);
+
+
+	puts("show int list");
+	libglinked_show_list(&list_int, printint);
+	puts("reverse list");
+	libglinked_reverse_list(&list_int);
+	libglinked_show_list(&list_int, printint);
+	
+	//foreach user input
+	int n = 10, 
+		res=0; // result
+
+	//returns of libglinked_foreach_node
+	void *ret      = NULL; //return 
+	void *stateh   = &res; //state handler
+
+	
+	ret = libglinked_foreach_node(&list_int, stateh, sum_int_list, &n);
+	
+	printf("ret    = %d\n", *(int*)ret);
+	printf("stateh = %d\n", *(int*)stateh);
+
+	puts("\nshowing processed list");
+	libglinked_show_list(&list_int, printint);
+
+	//clean all allocated memory
+	libglinked_delete_list(&list_int);	
+
   	return 0;
 }
