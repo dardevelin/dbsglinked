@@ -1,4 +1,4 @@
-# DBSGLINKED version 0.0.9
+# DBSGLINKED version 0.0.10
 
 This is a small C implementation of a generic linked list, to avoid having to
 create the same code all the time. 
@@ -72,6 +72,17 @@ http://www.gnu.org/licenses/gpl-3.0.txt
 #### void libglinked_show_list(libglinked_list_t *list, void(*f)(void * ));
 	Shows the full list nodes using the f function passed by parameter
 	to it
+
+#### void * libglinked_foreach_node(libglinked_list_t * list,void * state, void * ( *action)(void * , void * , void * ), void * param);
+        iterates through each node triggering action function.
+	like so:
+	catch = action(state, node->data, param);
+	this way catch will always contain the result of the last 
+	operation.
+	and state can be used to travel data through node calls.
+	data, is the node data to be processed/analised
+	param is so the user can carry any data into the function needed
+	for whatever the process is. 
 
 #### void libglinked_reverse_list(libglinked_list_t *list)
 	Reverses the linked list and sets list as the head;

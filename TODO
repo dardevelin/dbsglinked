@@ -1,5 +1,11 @@
 # TODO LIST
 
+-------------- changes made in version 0.0.10
+DONE - add function like foreach over the list
+     - update main.c to present better sample
+     now more documented
+--------------
+
 --------------- changes made in version 0.0.9
 DONE - add lifo functions, push and pop operations
      - update main.c to present a better sample
@@ -43,7 +49,7 @@ DONE: - Modify libglinked_delete_node and libglinked_delete_list to use a
   user define function to delete the node data 
 ---------------
 
-- add function like foreach over the list
+
 - add split function
 - add join function
 - add find function
