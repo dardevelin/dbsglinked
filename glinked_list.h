@@ -66,4 +66,9 @@ void libglinked_show_node(libglinked_node_t *, void(*f)(void*));
 void libglinked_show_list(libglinked_list_t *, void(*f)(void*));
 
 void libglinked_reverse_list(libglinked_list_t*);
+
+void *libglinked_foreach_node(libglinked_list_t *, void *, 
+    void * (*action)(void * , void * , void * ),
+    void * );
+
 #endif
