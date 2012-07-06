@@ -310,8 +310,24 @@ int main(int argc, char **argv)
 		printf("couldn't find node\n");
 	else
 	{
-		printf("found:");
+		printf("found: ");
 		libglinked_show_node(node, printint);
+	}
+
+	puts("\ntrying to remove node");
+	node = libglinked_remove_node(&list_int, (void*)&key, int_compare);
+
+	if(node == NULL)
+		puts("\tfailed to remove");
+	else
+	{
+		printf("found: ");
+		libglinked_show_node(node, printint);
+		printf("deleting node - - - -");
+		libglinked_delete_node(&list_int, node);
+		printf("DONE\n");
+		puts("\nshow list after removal");
+		libglinked_show_list(&list_int, printint);
 	}
 	
 	//clean all allocated memory
