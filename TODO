@@ -1,4 +1,16 @@
 # TODO LIST
+-------------- changes made in version 0.0.13 + 0.0.14 + 0.0.15 + 0.0.16 + 0.0.17
+DONE: - add split function
+      - update main.c to sample case split_list function
+      - update README to document split_list function
+DONE: - fix libglinked_remove_node make it reduce item count
+DONE: - fix glinked_list.h function prototypes
+      of ↓
+DONE: - fix libglinked_remove_node return type
+      - update readme to match return type
+DONE: - fix libglinked_find_node return type
+      - update readme to match return type
+--------------
 
 -------------- changes made in version 0.0.12
 DONE: - add remove_node function
@@ -62,8 +74,6 @@ DONE: - Modify libglinked_delete_node and libglinked_delete_list to use a
   user define function to delete the node data 
 ---------------
 
-
-- add split function
 - add join function
 
 - possibly add fast append capabilities
