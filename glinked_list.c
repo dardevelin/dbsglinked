@@ -213,3 +213,17 @@ void *libglinked_foreach_node(libglinked_list_t * list, void * state,
 
 	return action_ret;
 }
+
+void *libglinked_find_node(libglinked_list_t *list, void *key,
+    bool(*cmp)(void *, void*))
+{
+	libglinked_node_t *ptrnode;
+
+	for(ptrnode = list->head; ptrnode != NULL; ptrnode = ptrnode->next)
+	{
+		if(true == cmp(ptrnode->data, key))
+			break;
+	}
+
+	return ptrnode;
+}
