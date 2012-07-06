@@ -1,5 +1,11 @@
 # TODO LIST
 
+------------- changes made in version 0.0.20
+DONE: -fix libglinked_remove_node
+      make it fail if cmp is NULL
+      update docs of the function
+-------------
+
 ------------- changes made in version 0.0.19
 DONE: - fix libglinked_find_node
       make it fail if cmp is NULL
