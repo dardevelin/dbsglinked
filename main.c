@@ -382,9 +382,14 @@ int main(int argc, char **argv)
 	libglinked_show_list(&new_list, printint);
 	printf("has %zu items\n", libglinked_get_num_items(&new_list));
 
-    //clean the new list
-	libglinked_delete_list(&new_list);
-	
+	puts("\njoining new list with list at 150");
+	key = 150;
+	libglinked_join_list(&list_int, &new_list, (void*)&key, int_compare);
+
+	puts("show list after join");
+	libglinked_show_list(&list_int, printint);
+	printf("has %zu items\n", libglinked_get_num_items(&list_int));
+
 	//clean all allocated memory
 	libglinked_delete_list(&list_int);	
 
