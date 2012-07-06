@@ -1,5 +1,13 @@
 # TODO LIST
 
+------------- changes made in version 0.0.22
+DONE: -add join function
+      add prototype to glinked_list.h
+      add ligblinked_invalidate_list internal function
+      update readme
+      update main to sample case join_list function
+-------------
+
 ------------- changes made in version 0.0.21
 DONE: -fix libglinked_split_list
       make it fail if list->count < 2 by returnin null
@@ -98,8 +106,6 @@ DONE: - modify libglinked_create_node to not allocate or copy data to node->data
 DONE: - Modify libglinked_delete_node and libglinked_delete_list to use a 
   user define function to delete the node data 
 ---------------
-
-- add join function
 
 - possibly add fast append capabilities
 
