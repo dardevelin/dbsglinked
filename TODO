@@ -1,4 +1,11 @@
 # TODO LIST
+
+------------- changes made in version 0.0.19
+DONE: - fix libglinked_find_node
+      make it fail if cmp is NULL
+      update documentation of the function
+--------------
+
 -------------- changes made in version 0.0.18
 DONE: - fix libglinked_foreach_node
       make it fail if action is NULL
