@@ -1,4 +1,4 @@
-# DBSGLINKED version 0.0.13
+# DBSGLINKED version 0.0.17
 
 This is a small C implementation of a generic linked list, to avoid having to
 create the same code all the time. 
