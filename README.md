@@ -1,4 +1,4 @@
-# DBSGLINKED version 0.0.17
+# DBSGLINKED version 0.0.18
 
 This is a small C implementation of a generic linked list, to avoid having to
 create the same code all the time. 
@@ -83,6 +83,7 @@ http://www.gnu.org/licenses/gpl-3.0.txt
 	data, is the node data to be processed/analised
 	param is so the user can carry any data into the function needed
 	for whatever the process is. 
+	if action is NULL, the function fails and returns NULL;
 
 #### libglinked_node_t * libglinked_find_node(libglinked_list_t * list, void * key, bool (*cmp)(void * , void * ));
         This function receives a list where it uses cmp function to determine
