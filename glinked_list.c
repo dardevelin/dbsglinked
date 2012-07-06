@@ -204,6 +204,10 @@ void *libglinked_foreach_node(libglinked_list_t * list, void * state,
 	libglinked_node_t *ptrnode;
 	void *action_ret = NULL;
 
+	if(action == NULL)
+		return NULL; // no action to run, fail
+
+
 	for(ptrnode = list->head; ptrnode != NULL; ptrnode = ptrnode->next)
 	{
 		action_ret = action(state, ptrnode->data, param);
