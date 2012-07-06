@@ -270,6 +270,12 @@ libglinked_list_t *libglinked_split_list(libglinked_list_t *list,
 {
 	libglinked_node_t *ptrnode;
 	size_t i=0;	
+
+	if(list->count < 2)
+		return NULL; // no possible split, fail
+
+	if(cmp == NULL)
+		return NULL; //no action to trigger, fail
 	
 	for(ptrnode=list->head; ptrnode->next != NULL; ptrnode=ptrnode->next,i++)
 	{
