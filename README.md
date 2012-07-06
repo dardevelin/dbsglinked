@@ -1,4 +1,4 @@
-# DBSGLINKED version 0.0.21
+# DBSGLINKED version 0.0.22
 
 This is a small C implementation of a generic linked list, to avoid having to
 create the same code all the time. 
@@ -106,6 +106,18 @@ http://www.gnu.org/licenses/gpl-3.0.txt
         in case of failure returns null
 	if list-count < 2 , no possible split, returns null
 	if cmp is null, no possible compare, returns null
+
+#### libglinked_list_t *libglinked_join_list(libglinked_list_t * list, libglinked_list_t * slist, void * key, bool(*cmp)(void*,void*));
+        this function joins slist to list
+	if key and cmp are null, slist is joined at the end of list
+	if key is null, but cmp isn't or vice versa, fails, return null
+	if list is empty, list becomes slist, slist is invalidated, meaning
+	   needs to be re set with libglinked_init_list again.
+	if node_allocator or node_dellocator of lists are different, fails,
+	   incompatible lists
+	if success slist is invalidated and list is ready to use. for
+	convinience list is also returned
+        
 
 #### void libglinked_reverse_list(libglinked_list_t *list)
 	Reverses the linked list and sets list as the head;
