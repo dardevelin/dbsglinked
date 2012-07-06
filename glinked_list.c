@@ -221,6 +221,9 @@ libglinked_node_t *libglinked_find_node(libglinked_list_t *list, void *key,
 {
 	libglinked_node_t *ptrnode;
 
+	if(cmp == NULL)
+		return NULL; //no cmp to run, fail
+
 	for(ptrnode = list->head; ptrnode != NULL; ptrnode = ptrnode->next)
 	{
 		if(true == cmp(ptrnode->data, key))
