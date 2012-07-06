@@ -107,7 +107,7 @@ http://www.gnu.org/licenses/gpl-3.0.txt
 	if list-count < 2 , no possible split, returns null
 	if cmp is null, no possible compare, returns null
 
-#### libglinked_list_t *libglinked_join_list(libglinked_list_t * list, libglinked_list_t * slist, void * key, bool(*cmp)(void*,void*));
+#### libglinked_list_t * libglinked_join_list(libglinked_list_t * list, libglinked_list_t * slist, void * key, bool(*cmp)(void * ,void * ));
         this function joins slist to list
 	if key and cmp are null, slist is joined at the end of list
 	if key is null, but cmp isn't or vice versa, fails, return null
