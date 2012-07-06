@@ -72,9 +72,12 @@ void *libglinked_foreach_node(libglinked_list_t *, void *,
     void * (*action)(void * , void * , void * ),
     void * );
 
-void *libglinked_find_node(libglinked_list_t *, void *, 
+libglinked_node_t *libglinked_find_node(libglinked_list_t *, void *, 
     bool(*cmp)(void*,void*));
 
-void *libglinked_remove_node(libglinked_list_t *, void *,
+libglinked_node_t *libglinked_remove_node(libglinked_list_t *, void *,
     bool(*cmp)(void *, void*));
+
+libglinked_list_t *libglinked_split_list(libglinked_list_t *, 
+    libglinked_list_t *, void *, bool(*cmp)(void *, void*));
 #endif
