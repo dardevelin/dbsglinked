@@ -22,6 +22,7 @@
 #ifndef LIBGLINKED_LIST_H_
 #define LIBGLINKED_LIST_H_
 
+#include <stdbool.h> /*because of find function*/
 #include <stdlib.h>
 #define LIBGLINKED_DEFAULT_ALLOCATOR malloc
 #define LIBGLINKED_DEFAULT_DEALLOCATOR free
@@ -70,5 +71,8 @@ void libglinked_reverse_list(libglinked_list_t*);
 void *libglinked_foreach_node(libglinked_list_t *, void *, 
     void * (*action)(void * , void * , void * ),
     void * );
+
+void *libglinked_find_node(libglinked_list_t *, void *, 
+    bool(*cmp)(void*,void*));
 
 #endif
