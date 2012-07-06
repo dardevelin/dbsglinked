@@ -97,6 +97,7 @@ http://www.gnu.org/licenses/gpl-3.0.txt
 	if node->next->data and key are equal, if so cmp must return true and
         the node which data and key are equal is removed from the list
 	in case of failure returns null
+	if cmp is null, fail and return null
 
 #### libglinked_list_t *libglinked_split_list(libglinked_list_t * list, libglinked_list_t * nlist, void * key, bool(*cmp)(void * , void * ));
         This function receives a list where it uses cmp function to determine
