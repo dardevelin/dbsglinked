@@ -238,9 +238,13 @@ libglinked_node_t *libglinked_remove_node(libglinked_list_t *list, void *key,
 {
 	libglinked_node_t *ptrnode;
 	libglinked_node_t *ret = NULL;
-	//check if the list isn't empty
+	
+    //check if the list isn't empty
 	if(list->head == NULL)
 		return NULL;
+
+	if(cmp == NULL)
+		return NULL; //no cmp to trigger, fail
 
 	
 	for(ptrnode = list->head; ptrnode->next != NULL; ptrnode = ptrnode->next)
