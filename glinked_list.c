@@ -294,3 +294,77 @@ libglinked_list_t *libglinked_split_list(libglinked_list_t *list,
 	
 	return nlist;
 }
+
+static void libglinked_invalidate_list(libglinked_list_t *list)
+{
+	list->head = NULL;
+	list->count = 0;
+	list->node_allocator = NULL;
+	list->node_deallocator = NULL;
+}
+
+libglinked_list_t *libglinked_join_list(libglinked_list_t *list,
+    libglinked_list_t *slist, void *key, bool(*cmp)(void *,void*))
+{
+	libglinked_node_t *ptrnode;
+	libglinked_node_t *sptrnode;
+	bool end_join = false;
+
+	if(slist->head == NULL)
+		return NULL; // second list empty, nothing to join
+
+	if(key == NULL && cmp == NULL)
+		end_join = true;
+
+	if( (key == NULL && cmp != NULL) || (cmp == NULL && key != NULL ) )
+		return NULL; //invalid option, or both null, or both !null, fail
+
+	if(list->head == NULL)
+	{
+		list = slist;
+		libglinked_invalidate_list(slist);
+	}
+
+	if(list->node_allocator != slist->node_allocator
+	   || list->node_deallocator != slist->node_deallocator)
+		return NULL; //incompatible lists, fail
+
+	if(end_join == true)
+	{
+		//get to the end of list
+		for(ptrnode=list->head; ptrnode->next != NULL; ptrnode=ptrnode->next)
+			;
+
+		//append second list
+		ptrnode->next = slist->head;
+		//update items count
+		list->count += slist->count;
+		//invalidate slist
+		libglinked_invalidate_list(slist);
+		
+		return list;
+	}
+
+	//set ptrnode to key position
+	for(ptrnode=list->head; ptrnode->next != NULL; ptrnode=ptrnode->next)
+	{
+		if(true == cmp(ptrnode->data, key))
+			break;
+	}
+
+	//got to end of slist
+	for(sptrnode=slist->head; sptrnode->next != NULL; sptrnode=sptrnode->next)
+		;
+
+	//join second half of list to the end of slist
+	sptrnode->next = ptrnode->next;
+	//link the first half of list to the second list
+	ptrnode->next = slist->head;
+
+	//update list count, 
+	list->count += slist->count;
+
+	libglinked_invalidate_list(slist);
+
+	return list;
+}
