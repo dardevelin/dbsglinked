@@ -195,8 +195,6 @@ void libglinked_reverse_list(libglinked_list_t *list)
     
     next = list->head;
     list->head = next;
-
-
 }
 
 void *libglinked_foreach_node(libglinked_list_t * list, void * state,
@@ -214,7 +212,7 @@ void *libglinked_foreach_node(libglinked_list_t * list, void * state,
 	return action_ret;
 }
 
-void *libglinked_find_node(libglinked_list_t *list, void *key,
+libglinked_node_t *libglinked_find_node(libglinked_list_t *list, void *key,
     bool(*cmp)(void *, void*))
 {
 	libglinked_node_t *ptrnode;
@@ -228,7 +226,7 @@ void *libglinked_find_node(libglinked_list_t *list, void *key,
 	return ptrnode;
 }
 
-void *libglinked_remove_node(libglinked_list_t *list, void *key,
+libglinked_node_t *libglinked_remove_node(libglinked_list_t *list, void *key,
     bool(*cmp)(void *, void *))
 {
 	libglinked_node_t *ptrnode;
@@ -251,6 +249,31 @@ void *libglinked_remove_node(libglinked_list_t *list, void *key,
 	ret = ptrnode->next;
 	// keep the list linked
 	ptrnode->next = ret->next;
-	
+	list->count--;
 	return ret;
+}
+
+libglinked_list_t *libglinked_split_list(libglinked_list_t *list, 
+    libglinked_list_t *nlist, void *key,
+	bool(*cmp)(void *,void*))
+{
+	libglinked_node_t *ptrnode;
+	size_t i=0;	
+	
+	for(ptrnode=list->head; ptrnode->next != NULL; ptrnode=ptrnode->next,i++)
+	{
+		if(true == cmp(ptrnode->next->data, key))
+			break;
+	}
+
+	if(ptrnode->next == NULL)
+		return NULL; //not found
+
+	libglinked_init_list(nlist, list->node_allocator, list->node_deallocator);
+	nlist->head  = ptrnode->next;
+	nlist->count = list->count - i-1;
+	list->count  = i+1;
+	ptrnode->next = NULL;
+	
+	return nlist;
 }
