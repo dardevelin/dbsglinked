@@ -1,4 +1,10 @@
 # TODO LIST
+-------------- changes made in version 0.0.18
+DONE: - fix libglinked_foreach_node
+      make it fail if action is NULL
+      update documentation of the function
+--------------
+
 -------------- changes made in version 0.0.13 + 0.0.14 + 0.0.15 + 0.0.16 + 0.0.17
 DONE: - add split function
       - update main.c to sample case split_list function
