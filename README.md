@@ -1,4 +1,4 @@
-# DBSGLINKED version 0.0.11
+# DBSGLINKED version 0.0.12
 
 This is a small C implementation of a generic linked list, to avoid having to
 create the same code all the time. 
@@ -88,6 +88,11 @@ http://www.gnu.org/licenses/gpl-3.0.txt
         This function receives a list where it uses cmp function to determine
         if node->data and key are equal, if so cmp must return true and
         returns the node that was found
+
+#### void * libglinked_remove_node(libglinked_list_t * list, void * key, bool (*cmp)(void * , void * ));
+     	This function receives a list where it uses cmp function to determine
+	if node->next->data and key are equal, if so cmp must return true and
+        the node which data and key are equal is removed from the list
 
 #### void libglinked_reverse_list(libglinked_list_t *list)
 	Reverses the linked list and sets list as the head;
