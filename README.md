@@ -1,4 +1,4 @@
-# DBSGLINKED version 0.0.18
+# DBSGLINKED version 0.0.19
 
 This is a small C implementation of a generic linked list, to avoid having to
 create the same code all the time. 
@@ -90,6 +90,7 @@ http://www.gnu.org/licenses/gpl-3.0.txt
         if node->data and key are equal, if so cmp must return true and
         returns the node that was found
 	in case of failure returns null
+	if cmp is null, fail and return null
 
 #### libglinked_node_t * libglinked_remove_node(libglinked_list_t * list, void * key, bool (*cmp)(void * , void * ));
      	This function receives a list where it uses cmp function to determine
