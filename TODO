@@ -57,6 +57,7 @@ DONE: - Modify libglinked_delete_node and libglinked_delete_list to use a
 
 - add split function
 - add join function
+- add remove_node function
 
 - possibly add fast append capabilities
 
