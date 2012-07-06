@@ -329,6 +329,61 @@ int main(int argc, char **argv)
 		puts("\nshow list after removal");
 		libglinked_show_list(&list_int, printint);
 	}
+
+	//create some more nodes to sample split list function
+
+	node = libglinked_create_node(&list_int, (void*)icopy(500),ideallocator);
+	if(node == NULL)
+		fprintf(stderr,"\nfailed to create node %d\n", __LINE__);
+
+	libglinked_enqueue_node(&list_int, node);
+
+	node = libglinked_create_node(&list_int, (void*)icopy(600),ideallocator);
+	if(node == NULL)
+		fprintf(stderr,"\nfailed to create node %d\n", __LINE__);
+
+	libglinked_enqueue_node(&list_int, node);
+
+	node = libglinked_create_node(&list_int, (void*)icopy(700),ideallocator);
+	if(node == NULL)
+		fprintf(stderr,"\nfailed to create node %d\n", __LINE__);
+
+	libglinked_enqueue_node(&list_int, node);
+
+	node = libglinked_create_node(&list_int, (void*)icopy(800),ideallocator);
+	if(node == NULL)
+		fprintf(stderr,"\nfailed to create node %d\n", __LINE__);
+
+	libglinked_enqueue_node(&list_int, node);
+
+	node = libglinked_create_node(&list_int, (void*)icopy(900),ideallocator);
+	if(node == NULL)
+		fprintf(stderr,"\nfailed to create node %d\n", __LINE__);
+
+	libglinked_enqueue_node(&list_int, node);
+	
+	puts("\nshow the current list before the split");
+	libglinked_show_list(&list_int, printint);
+	printf("has %zu items\n", libglinked_get_num_items(&list_int));
+	
+	libglinked_list_t new_list;
+	puts("\nmaking split at 600");
+	key = 600;
+	if(libglinked_split_list(&list_int, &new_list, (void*)&key, int_compare) == NULL)
+		fprintf(stderr,"split failed %d\n", __LINE__);
+	
+	puts("\nshow list after split");
+
+	libglinked_show_list(&list_int, printint);
+	printf("has %zu items\n", libglinked_get_num_items(&list_int));
+
+	puts("\nshow new list, from split");
+	
+	libglinked_show_list(&new_list, printint);
+	printf("has %zu items\n", libglinked_get_num_items(&new_list));
+
+    //clean the new list
+	libglinked_delete_list(&new_list);
 	
 	//clean all allocated memory
 	libglinked_delete_list(&list_int);	
