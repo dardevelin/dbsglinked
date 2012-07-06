@@ -1,5 +1,10 @@
 # TODO LIST
-
+-------------- changes made in version 0.0.11
+DONE: - add find function
+      - update main.c to present a sample of
+      find_node and all respective auxiliar functions
+      - update README to document find_node function
+--------------
 -------------- changes made in version 0.0.10
 DONE - add function like foreach over the list
      - update main.c to present better sample
@@ -52,7 +57,6 @@ DONE: - Modify libglinked_delete_node and libglinked_delete_list to use a
 
 - add split function
 - add join function
-- add find function
 
 - possibly add fast append capabilities
 
