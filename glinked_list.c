@@ -227,3 +227,30 @@ void *libglinked_find_node(libglinked_list_t *list, void *key,
 
 	return ptrnode;
 }
+
+void *libglinked_remove_node(libglinked_list_t *list, void *key,
+    bool(*cmp)(void *, void *))
+{
+	libglinked_node_t *ptrnode;
+	libglinked_node_t *ret = NULL;
+	//check if the list isn't empty
+	if(list->head == NULL)
+		return NULL;
+
+	
+	for(ptrnode = list->head; ptrnode->next != NULL; ptrnode = ptrnode->next)
+	{
+		if(true == cmp(ptrnode->next->data, key))
+			break;
+	}
+
+	if(ptrnode->next == NULL)
+		return NULL; //not found
+	
+	// save the node that we are removing
+	ret = ptrnode->next;
+	// keep the list linked
+	ptrnode->next = ret->next;
+	
+	return ret;
+}
