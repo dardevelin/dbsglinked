@@ -80,4 +80,7 @@ libglinked_node_t *libglinked_remove_node(libglinked_list_t *, void *,
 
 libglinked_list_t *libglinked_split_list(libglinked_list_t *, 
     libglinked_list_t *, void *, bool(*cmp)(void *, void*));
+
+libglinked_list_t *libglinked_join_list(libglinked_list_t *,
+    libglinked_list_t *, void *, bool(*cmp)(void *,void*));
 #endif
