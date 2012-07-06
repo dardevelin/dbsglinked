@@ -131,6 +131,19 @@ void *sum_int_list(void *state, void *data, void *param)
 	
 }
 
+/*
+  this is a user defined function, however it
+  needs to respect the given prototype
+  bool (void*, void *); and needs to return true,
+  when both are equal.
+  this is for sample the use of
+  libglinked_find_node function
+*/
+bool int_compare(void *data, void *key)
+{
+	return (*(int*)data) == (*(int*)key);
+}
+
 int main(int argc, char **argv)
 {
 	//our sample constants
@@ -280,12 +293,27 @@ int main(int argc, char **argv)
 	
 	ret = libglinked_foreach_node(&list_int, stateh, sum_int_list, &n);
 	
+	puts("showing ret value and state handler value");
 	printf("ret    = %d\n", *(int*)ret);
 	printf("stateh = %d\n", *(int*)stateh);
 
 	puts("\nshowing processed list");
 	libglinked_show_list(&list_int, printint);
 
+	//the value we are looking for in the list
+	int key = 300;
+	printf("trying to find node :\n\t");
+	node = libglinked_find_node(&list_int, (void*)&key, int_compare);
+
+	//check if we found the node or not
+	if(node == NULL )
+		printf("couldn't find node\n");
+	else
+	{
+		printf("found:");
+		libglinked_show_node(node, printint);
+	}
+	
 	//clean all allocated memory
 	libglinked_delete_list(&list_int);	
 
