@@ -1,5 +1,11 @@
 # TODO LIST
 
+------------- changes made in version 0.0.21
+DONE: -fix libglinked_split_list
+      make it fail if list->count < 2 by returnin null
+      make it fail if cmp is null by returning null
+-------------
+
 ------------- changes made in version 0.0.20
 DONE: -fix libglinked_remove_node
       make it fail if cmp is NULL
