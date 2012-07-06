@@ -104,6 +104,8 @@ http://www.gnu.org/licenses/gpl-3.0.txt
         the split location. stores half of the list into nlist, returns
         a pointer to nlist.
         in case of failure returns null
+	if list-count < 2 , no possible split, returns null
+	if cmp is null, no possible compare, returns null
 
 #### void libglinked_reverse_list(libglinked_list_t *list)
 	Reverses the linked list and sets list as the head;
