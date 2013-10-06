@@ -246,6 +246,17 @@ libglinked_node_t *libglinked_remove_node(libglinked_list_t *list, void *key,
 	if(cmp == NULL)
 		return NULL; //no cmp to trigger, fail
 
+	//check if is the first node
+	ptrnode = list->head;
+	if( true == cmp(ptrnode->data, key) )
+	{
+		ret = list->head;
+		list->head = list->head->next;
+		if( (list->count - 1) >= 0 )
+			--list->count;
+		
+		return ret;
+	}
 	
 	for(ptrnode = list->head; ptrnode->next != NULL; ptrnode = ptrnode->next)
 	{
