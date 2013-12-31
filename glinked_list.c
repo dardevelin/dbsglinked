@@ -24,7 +24,7 @@
 #include <stdlib.h>
 #include "glinked_list.h"
 
-void libglinked_init_list(libglinked_list_t *list, 
+void libglinked_init_list(libglinked_list_t *list,
     void *(*node_allocator)(size_t), void(*node_deallocator)(void*))
 {
 	list->count = 0;
@@ -32,12 +32,12 @@ void libglinked_init_list(libglinked_list_t *list,
 		list->node_allocator = node_allocator;
 	else
 		list->node_allocator = LIBGLINKED_DEFAULT_ALLOCATOR;
-	
+
 	if(node_deallocator != NULL)
 		list->node_deallocator = node_deallocator;
 	else
 		list->node_deallocator = LIBGLINKED_DEFAULT_DEALLOCATOR;
-	
+
 	list->head = NULL;
 	return;
 }
@@ -46,7 +46,7 @@ libglinked_node_t *libglinked_create_node(libglinked_list_t *list,
     void *data, void(*dalloc)(void*))
 {
 	libglinked_node_t *ptrnode;
-	
+
 	if (data == NULL )
 		return NULL;
 
@@ -69,7 +69,7 @@ void libglinked_delete_node(libglinked_list_t *list, libglinked_node_t *node)
 	{
 		if( node->data != NULL && node->data_deallocator != NULL )
 			node->data_deallocator(node->data);
-		
+
 		list->node_deallocator(node);
 		return;
 	}
@@ -79,10 +79,10 @@ libglinked_node_t *libglinked_enqueue_node(libglinked_list_t *list,
     libglinked_node_t *node)
 {
 	libglinked_node_t *ptrnode = list->head;
-	
+
 	if( node == NULL )
 		return NULL; // nothing to enqueue
-	
+
 	if( list->head == NULL )
 	{
 		list->head = node;
@@ -104,7 +104,7 @@ libglinked_node_t *libglinked_push_node(libglinked_list_t *list,
 
 	if( node == NULL )
 		return NULL; //nothing to push
-	
+
 	if( list->head == NULL )
 	{
 		list->head = node;
@@ -122,7 +122,7 @@ libglinked_node_t *libglinked_push_node(libglinked_list_t *list,
 libglinked_node_t *libglinked_dequeue_node(libglinked_list_t *list)
 {
 	libglinked_node_t *ptrnode = list->head;
-	
+
 	if( list->head == NULL )
 		return NULL; // nothing to dequeue
 
@@ -137,7 +137,7 @@ libglinked_node_t *libglinked_pop_node(libglinked_list_t *list)
 
 	if( list->head == NULL )
 		return NULL; // nothing to pop
-	
+
 	list->head = list->head->next;
 	list->count--;
 	return ptrnode;
@@ -149,7 +149,7 @@ void libglinked_delete_list(libglinked_list_t *list )
 	{
 		libglinked_delete_node(list,libglinked_dequeue_node(list));
 	}
-	
+
 }
 
 size_t libglinked_get_num_items(libglinked_list_t *list)
@@ -176,7 +176,7 @@ void libglinked_show_list(libglinked_list_t *list, void(*f)(void*))
 void libglinked_reverse_list(libglinked_list_t *list)
 {
 	libglinked_node_t *head = list->head,
-		              *prev = NULL, 
+		              *prev = NULL,
 		              *next = NULL;
 
     while( head )
@@ -192,7 +192,7 @@ void libglinked_reverse_list(libglinked_list_t *list)
         //set current as Next
         head = next;
     }
-    
+
     next = list->head;
     list->head = next;
 }
@@ -238,7 +238,7 @@ libglinked_node_t *libglinked_remove_node(libglinked_list_t *list, void *key,
 {
 	libglinked_node_t *ptrnode;
 	libglinked_node_t *ret = NULL;
-	
+
     //check if the list isn't empty
 	if(list->head == NULL)
 		return NULL;
@@ -254,10 +254,10 @@ libglinked_node_t *libglinked_remove_node(libglinked_list_t *list, void *key,
 		list->head = list->head->next;
 		if( (list->count - 1) >= 0 )
 			--list->count;
-		
+
 		return ret;
 	}
-	
+
 	for(ptrnode = list->head; ptrnode->next != NULL; ptrnode = ptrnode->next)
 	{
 		if(true == cmp(ptrnode->next->data, key))
@@ -266,7 +266,7 @@ libglinked_node_t *libglinked_remove_node(libglinked_list_t *list, void *key,
 
 	if(ptrnode->next == NULL)
 		return NULL; //not found
-	
+
 	// save the node that we are removing
 	ret = ptrnode->next;
 	// keep the list linked
@@ -275,19 +275,19 @@ libglinked_node_t *libglinked_remove_node(libglinked_list_t *list, void *key,
 	return ret;
 }
 
-libglinked_list_t *libglinked_split_list(libglinked_list_t *list, 
+libglinked_list_t *libglinked_split_list(libglinked_list_t *list,
     libglinked_list_t *nlist, void *key,
 	bool(*cmp)(void *,void*))
 {
 	libglinked_node_t *ptrnode;
-	size_t i=0;	
+	size_t i=0;
 
 	if(list->count < 2)
 		return NULL; // no possible split, fail
 
 	if(cmp == NULL)
 		return NULL; //no action to trigger, fail
-	
+
 	for(ptrnode=list->head; ptrnode->next != NULL; ptrnode=ptrnode->next,i++)
 	{
 		if(true == cmp(ptrnode->next->data, key))
@@ -302,7 +302,7 @@ libglinked_list_t *libglinked_split_list(libglinked_list_t *list,
 	nlist->count = list->count - i-1;
 	list->count  = i+1;
 	ptrnode->next = NULL;
-	
+
 	return nlist;
 }
 
@@ -352,7 +352,7 @@ libglinked_list_t *libglinked_join_list(libglinked_list_t *list,
 		list->count += slist->count;
 		//invalidate slist
 		libglinked_invalidate_list(slist);
-		
+
 		return list;
 	}
 
@@ -372,7 +372,7 @@ libglinked_list_t *libglinked_join_list(libglinked_list_t *list,
 	//link the first half of list to the second list
 	ptrnode->next = slist->head;
 
-	//update list count, 
+	//update list count,
 	list->count += slist->count;
 
 	libglinked_invalidate_list(slist);
