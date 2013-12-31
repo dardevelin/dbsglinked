@@ -1,8 +1,8 @@
 # DBSGLINKED version 0.0.23
 
 This is a small C implementation of a generic linked list, to avoid having to
-create the same code all the time. 
-		
+create the same code all the time.
+
 ## LICENSE - GPLv3
 See COPYING to get the license or go to
 http://www.gnu.org/licenses/gpl-3.0.txt
@@ -11,7 +11,7 @@ http://www.gnu.org/licenses/gpl-3.0.txt
 ### Usage:
     A complete use of libraries function can be found in main.c
     main.c is not required to use the library.
-#### libglinked_init_list(libglinked_list_t * list, void * (*node_allocator)(void * ), void(*node_deallocator)(void * )); 
+#### libglinked_init_list(libglinked_list_t * list, void * (*node_allocator)(void * ), void(*node_deallocator)(void * ));
     Prepares the list so it can be used.
 
 #### libglinked_node_t *libglinked_create_node(libglinked_list_t *list, void *data, void(*dalloc)(void * ));
@@ -30,7 +30,7 @@ http://www.gnu.org/licenses/gpl-3.0.txt
      else if node->data or node->data_deallocator are set to null
      the call will be ignored, however the node_t structure will be deallocated using
      list->node_deallocator that was set using libglinked_init_list
-	
+
 #### libglinked_node_t *libglinked_enqueue_node(libglinked_list_t *list,linglinked_node_t *node);
      Increments the list items count;
      Appends node to the end of list (fifo)
@@ -56,10 +56,10 @@ http://www.gnu.org/licenses/gpl-3.0.txt
 #### libglinked_node_t * libglinked_pop_node(libglinked_list_t * list);
      Decrements the list items count (lifo)
      Removes a node from the head of the list and returns it
-     Returns NULL if the list is empty     
+     Returns NULL if the list is empty
 
 #### void libglinked_delete_list(libglinked_list_t *list );
-     dequeues all nodes from the list and deletes them using 
+     dequeues all nodes from the list and deletes them using
      libglinked_delete_node(libglinked_node_t *node );
 
 #### size_t libglinked_get_num_items(libglinked_list_t *list);
@@ -67,7 +67,7 @@ http://www.gnu.org/licenses/gpl-3.0.txt
 
 #### void libglinked_show_node(libglinked_node_t *node, void(*f)(void * ));
      Shows the data stored in the node, using the function passed
-     By parameter to it. 
+     By parameter to it.
 
 #### void libglinked_show_list(libglinked_list_t *list, void(*f)(void * ));
      Shows the full list nodes using the f function passed by parameter
@@ -77,12 +77,12 @@ http://www.gnu.org/licenses/gpl-3.0.txt
      iterates through each node triggering action function.
      like so:
      catch = action(state, node->data, param);
-     this way catch will always contain the result of the last 
+     this way catch will always contain the result of the last
      operation.
      and state can be used to travel data through node calls.
      data, is the node data to be processed/analised
      param is so the user can carry any data into the function needed
-     for whatever the process is. 
+     for whatever the process is.
      if action is NULL, the function fails and returns NULL;
 
 #### libglinked_node_t * libglinked_find_node(libglinked_list_t * list, void * key, bool (*cmp)(void * , void * ));
@@ -117,11 +117,11 @@ http://www.gnu.org/licenses/gpl-3.0.txt
      incompatible lists
      if success slist is invalidated and list is ready to use. for
      convinience list is also returned
-        
+
 
 #### void libglinked_reverse_list(libglinked_list_t *list)
      Reverses the linked list and sets list as the head;
-	
+
 ## TODO
     A complete todo list can be found in TODO file
     This file also contains information of which version received

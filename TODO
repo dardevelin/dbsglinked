@@ -47,7 +47,7 @@ DONE: - fix libglinked_find_node return type
 
 -------------- changes made in version 0.0.12
 DONE: - add remove_node function
-      - update main.c to present a sample of 
+      - update main.c to present a sample of
       - update README to document remove_node
       function;
 --------------
@@ -78,7 +78,7 @@ DONE: - change libglinked_push_node and libglinked_pop_node names
 --------------- changes made in version 0.0.5 + 0.0.6 + 0.0.7
 DONE:- Add to libglinked_list_t function pointer for an allocator and a deallocator
   this should make easy to integrate the list into projects that
-  use a custom (de)allocator. these functions will be used to create and delete 
+  use a custom (de)allocator. these functions will be used to create and delete
   libglinked_node_t structures
 DONE↓:- add function to set libglinked_list_t function pointers. //changed to
     →- modify libglinked_init_list to receive a (de)allocator
@@ -103,8 +103,8 @@ DONE: - modify libglinked_create_node to not allocate or copy data to node->data
 ---------------
 
 --------------- added in version 0.0.2
-DONE: - Modify libglinked_delete_node and libglinked_delete_list to use a 
-  user define function to delete the node data 
+DONE: - Modify libglinked_delete_node and libglinked_delete_list to use a
+  user define function to delete the node data
 ---------------
 
 - possibly add fast append capabilities
@@ -112,14 +112,14 @@ DONE: - Modify libglinked_delete_node and libglinked_delete_list to use a
 - Try make deb package for debian
 
 - See if the code needs more comments
-  
-- Implement search and friends, 
+
+- Implement search and friends,
 
 {
 - maybe add an Identifier to the items, this way a user could define types and use the list
   as a really generic type one.
- 
-- if the previous mentioned features gets in, 
+
+- if the previous mentioned features gets in,
 	* implement sort, by key/identifier/type
 	* implement remove function for specific elements
         * insert elements according to key/id/type rules

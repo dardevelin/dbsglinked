@@ -40,7 +40,7 @@ typedef struct sGlinkedList {
 	libglinked_node_t *head;
 } libglinked_list_t;
 //interface
-void libglinked_init_list(libglinked_list_t *, 
+void libglinked_init_list(libglinked_list_t *,
   void *(*node_allocator)(size_t), void(*node_deallocator)(void*));
 
 libglinked_node_t *libglinked_create_node(libglinked_list_t *,
@@ -68,17 +68,17 @@ void libglinked_show_list(libglinked_list_t *, void(*f)(void*));
 
 void libglinked_reverse_list(libglinked_list_t*);
 
-void *libglinked_foreach_node(libglinked_list_t *, void *, 
+void *libglinked_foreach_node(libglinked_list_t *, void *,
     void * (*action)(void * , void * , void * ),
     void * );
 
-libglinked_node_t *libglinked_find_node(libglinked_list_t *, void *, 
+libglinked_node_t *libglinked_find_node(libglinked_list_t *, void *,
     bool(*cmp)(void*,void*));
 
 libglinked_node_t *libglinked_remove_node(libglinked_list_t *, void *,
     bool(*cmp)(void *, void*));
 
-libglinked_list_t *libglinked_split_list(libglinked_list_t *, 
+libglinked_list_t *libglinked_split_list(libglinked_list_t *,
     libglinked_list_t *, void *, bool(*cmp)(void *, void*));
 
 libglinked_list_t *libglinked_join_list(libglinked_list_t *,
